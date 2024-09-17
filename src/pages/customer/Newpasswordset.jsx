@@ -16,7 +16,7 @@ function Newpasswordset() {
     const otp = localStorage.getItem('otp');
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/reset-password/', { otp, new_password: newPassword });
+      const response = await axios.post('https://doorsteppro.shop/reset-password/', { otp, new_password: newPassword });
       const { message, is_professional } = response.data;
       
       // Remove OTP from local storage

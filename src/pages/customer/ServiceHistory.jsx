@@ -17,7 +17,7 @@ function ServiceHistory() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/bookings/user/history-page', {
+        const response = await axios.get('https://doorsteppro.shop/bookings/user/history-page', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',

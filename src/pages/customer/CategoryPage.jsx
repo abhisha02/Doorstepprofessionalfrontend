@@ -11,7 +11,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const fetchCategoryDetails = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/services/category/${categoryId}/`);
+        const response = await axios.get(`https://doorsteppro.shop/services/category/${categoryId}/`);
         console.log('Fetched data:', response.data); // Verify this log
 
         // Assuming response.data is an array of services

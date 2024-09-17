@@ -18,7 +18,7 @@ function Adminhome() {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/aadmin/admin-dashboard-data/', {
+        const response = await axios.get('https://doorsteppro.shop/aadmin/admin-dashboard-data/', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',

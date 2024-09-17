@@ -13,7 +13,7 @@ function ChatComponent({ booking, onClose, currentUserId }) {
   useEffect(() => {
     const fetchChatHistory = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/chat/chat-history/${booking.id}/`, {
+        const response = await axios.get(`https://doorsteppro.shop/chat/chat-history/${booking.id}/`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access')}`,
           }

@@ -15,7 +15,7 @@ function OTPforgotpassword() {
     setMessage(null);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/reset-password/verify-otp/', { otp });
+      const response = await axios.post('https://doorsteppro.shop/reset-password/verify-otp/', { otp });
       setMessage(response.data.message);
       
       // Store OTP in local storage

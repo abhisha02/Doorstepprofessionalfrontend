@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import avatar from './avatar.jpeg';
 
 function AdminProApproval() {
-  const baseURL = "http://127.0.0.1:8000";
+  const baseURL = 'https://doorsteppro.shop';
   const [professionals, setProfessionals] = useState([]);
   const [filteredProfessionals, setFilteredProfessionals] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");

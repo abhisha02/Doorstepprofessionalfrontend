@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const AdminBookings = () => {
-  const baseURL = "http://127.0.0.1:8000";
+  const baseURL ='https://doorsteppro.shop';
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

@@ -12,7 +12,7 @@ function ProServiceHistory() {
   const [rescheduleBookingId, setRescheduleBookingId] = useState(null); // Added state for rescheduling
   const user_basic_details = useSelector(state => state.user_basic_details);
   const navigate = useNavigate();
-  const baseURL = 'http://127.0.0.1:8000';
+  const baseURL = 'https://doorsteppro.shop';
   const token = localStorage.getItem('access'); // Token for authentication
 
   useEffect(() => {

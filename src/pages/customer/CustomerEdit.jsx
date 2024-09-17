@@ -9,7 +9,7 @@ function CustomerEdit() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authentication_user = useSelector(state => state.authentication_user);
-  const baseURL = 'http://127.0.0.1:8000';
+  const baseURL = 'https://doorsteppro.shop';
   const token = localStorage.getItem('access');
 
   const [userDetails, setUserDetails] = useState(null);

@@ -14,7 +14,7 @@ function Servicedetailed() {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/services/services/${id}/`);
+        const response = await axios.get(`https://doorsteppro.shop/services/services/${id}/`);
         setService(response.data);
       } catch (error) {
         console.error('Error fetching service:', error);

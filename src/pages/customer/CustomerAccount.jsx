@@ -29,7 +29,7 @@ function CustomerAccount() {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/bookings/bookings/user/', {
+      const response = await axios.get('https://doorsteppro.shop/bookings/bookings/user/', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
@@ -132,7 +132,7 @@ function CustomerAccount() {
   };
   
   const cancelBooking = (bookingId) => {
-    axios.delete(`http://127.0.0.1:8000/bookings/bookings/${bookingId}/delete/`, {
+    axios.delete(`https://doorsteppro.shop/bookings/bookings/${bookingId}/delete/`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',
@@ -199,7 +199,7 @@ function CustomerAccount() {
     console.log("Starting payment process for booking:", booking.id);
     try {
       console.log("Initiating payment request to backend");
-      const response = await axios.post('http://localhost:8000/payments/initiate_payment/', {
+      const response = await axios.post('https://doorsteppro.shop/payments/initiate_payment/', {
         booking_id: booking.id
       });
       console.log("Payment data received:", response.data);
@@ -222,7 +222,7 @@ function CustomerAccount() {
         handler: async (response) => {
           console.log("Payment successful, verifying with backend");
           try {
-            const paymentVerifyResponse = await axios.post('http://localhost:8000/payments/payment_success/', response);
+            const paymentVerifyResponse = await axios.post('https://doorsteppro.shop/payments/payment_success/', response);
             console.log("Payment verification response:", paymentVerifyResponse.data);
             
             setBookings(prevBookings =>
@@ -280,7 +280,7 @@ function CustomerAccount() {
   
   const handlePaymentFailure = async (bookingId) => {
     try {
-      await axios.post('http://localhost:8000/payments/payment-failed/', {
+      await axios.post('https://doorsteppro.shop/payments/payment-failed/', {
         razorpay_order_id: bookingId
       });
       

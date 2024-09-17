@@ -17,7 +17,7 @@ function Review() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/bookings/user/reviewpage', {
+        const response = await axios.get('https://doorsteppro.shop/bookings/user/reviewpage', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',

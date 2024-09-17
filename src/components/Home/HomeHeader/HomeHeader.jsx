@@ -1,12 +1,13 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, InputBase, Box, Button } from '@mui/material';
-import { styled, alpha } from '@mui/material/styles';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, InputBase, Box, Button, Menu, MenuItem, IconButton, useMediaQuery } from '@mui/material';
+import { styled, alpha, useTheme } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = styled(AppBar)(({ theme }) => ({
   backgroundColor: 'grey',
-  height: '80px', // Set the height of the header to 120px
+  height: '80px',
 }));
 
 const DoorstepProBox = styled(Box)(({ theme }) => ({
@@ -16,9 +17,7 @@ const DoorstepProBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   borderRadius: theme.shape.borderRadius,
-  [theme.breakpoints.down('sm')]: {
-    marginBottom: theme.spacing(1),
-  },
+  marginRight: theme.spacing(2),
 }));
 
 const Search = styled('div')(({ theme }) => ({
@@ -28,17 +27,12 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginLeft: theme.spacing(2),
   marginRight: theme.spacing(2),
-  width: 'auto',
+  marginLeft: 0,
+  width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
-  },
-  [theme.breakpoints.down('sm')]: {
-    marginLeft: 0,
-    marginRight: 0,
-    width: '100%',
-    marginBottom: theme.spacing(1),
+    width: 'auto',
   },
 }));
 
@@ -62,29 +56,47 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
       width: '20ch',
     },
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
   },
 }));
 
 const HeaderBar = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    handleClose();
+  };
+
+  const menuItems = [
+    { label: 'Customer', path: '/customer/login' },
+    { label: 'Admin', path: '/admin/login' },
+    { label: 'Professional', path: '/professional/login' },
+  ];
 
   return (
     <Header position="static">
-      <Toolbar sx={{ 
-        flexWrap: 'wrap',
-        height: '100%', // Ensure the Toolbar takes full height of the Header
+      <Toolbar sx={{
+        height: '100%',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
       }}>
         <DoorstepProBox>
           <Typography variant="h6" noWrap>
             DoorstepPro
           </Typography>
         </DoorstepProBox>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }} />
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
@@ -94,10 +106,50 @@ const HeaderBar = () => {
             inputProps={{ 'aria-label': 'search' }}
           />
         </Search>
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 1 }}>
-          <Button color="inherit" onClick={() => navigate('/customer/login')}>Customer</Button>
-          <Button color="inherit" onClick={() => navigate('/admin/login')}>Admin</Button>
-          <Button color="inherit" onClick={() => navigate('/professional/login')}>Professional</Button>
+        <Box>
+          {isMobile ? (
+            <>
+              <IconButton
+                size="large"
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleMenu}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                {menuItems.map((item) => (
+                  <MenuItem key={item.label} onClick={() => handleNavigation(item.path)}>
+                    {item.label}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
+          ) : (
+            menuItems.map((item) => (
+              <Button
+                key={item.label}
+                color="inherit"
+                onClick={() => handleNavigation(item.path)}
+              >
+                {item.label}
+              </Button>
+            ))
+          )}
         </Box>
       </Toolbar>
     </Header>

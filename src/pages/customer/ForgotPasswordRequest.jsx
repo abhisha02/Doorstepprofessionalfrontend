@@ -15,7 +15,7 @@ function ForgotPasswordRequest() {
     setMessage(null);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/password-reset-request/', { email });
+      const response = await axios.post('https://doorsteppro.shop/password-reset-request/', { email });
       setMessage(response.data.message);
       navigate('/customer/otp-forgotpassword'); // Navigate to OTP verification page
     } catch (error) {

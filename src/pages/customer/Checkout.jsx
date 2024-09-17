@@ -16,7 +16,7 @@ const Checkout = () => {
   const fetchBookingDetails = async () => {
     if (bookingId) {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/bookings/booking/${bookingId}/`, {
+        const response = await axios.get(`https://doorsteppro.shop/bookings/booking/${bookingId}/`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
@@ -40,7 +40,7 @@ const Checkout = () => {
 
   const updateQuantity = async (itemId, newQuantity) => {
     try {
-      await axios.patch(`http://127.0.0.1:8000/bookings/booking-items/${itemId}/update-quantity/`, 
+      await axios.patch(`https://doorsteppro.shop/bookings/booking-items/${itemId}/update-quantity/`, 
       { quantity: newQuantity }, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -59,7 +59,7 @@ const Checkout = () => {
     const confirmRemove = window.confirm("Are you sure you want to delete this item?");
     if (confirmRemove) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/bookings/booking-items/${itemId}/delete`, {
+        await axios.delete(`https://doorsteppro.shop/bookings/booking-items/${itemId}/delete`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
@@ -76,7 +76,7 @@ const Checkout = () => {
 
   const updateStatus = async (newStatus) => {
     try {
-      await axios.patch(`http://127.0.0.1:8000/bookings/bookings/booking/${bookingId}/update-status/`, 
+      await axios.patch(`https://doorsteppro.shop/bookings/bookings/booking/${bookingId}/update-status/`, 
       { status: newStatus }, {
         headers: {
           'Authorization': `Bearer ${token}`,

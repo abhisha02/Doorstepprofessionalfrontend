@@ -31,7 +31,7 @@ const Addresses = () => {
 
   const fetchAddresses = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/bookings/addresses/', {
+      const response = await axios.get('https://doorsteppro.shop/bookings/addresses/', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
@@ -51,7 +51,7 @@ const Addresses = () => {
 
   const handleAddAddress = async () => {
     try {
-      await axios.post('http://127.0.0.1:8000/bookings/addresses/', { ...newAddress, customer: customerId }, {
+      await axios.post('https://doorsteppro.shop/bookings/addresses/', { ...newAddress, customer: customerId }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
@@ -73,7 +73,7 @@ const Addresses = () => {
 
   const handleUpdateAddress = async () => {
     try {
-      await axios.put(`http://127.0.0.1:8000/bookings/addresses/${editingAddress.id}/`, { ...newAddress, customer: customerId }, {
+      await axios.put(`https://doorsteppro.shop/bookings/addresses/${editingAddress.id}/`, { ...newAddress, customer: customerId }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
@@ -89,7 +89,7 @@ const Addresses = () => {
 
   const handleDeleteAddress = async () => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/bookings/addresses/delete/${addressToDelete}/`, {
+      await axios.delete(`https://doorsteppro.shop/bookings/addresses/delete/${addressToDelete}/`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',
@@ -119,7 +119,7 @@ const Addresses = () => {
   };
   const handleAssignAddress = async () => {
     try {
-      await axios.patch(`http://127.0.0.1:8000/bookings/bookings/${bookingId}/assign-address/`, { address_id: selectedAddressId, address_pincode: confirmPincode  }, {
+      await axios.patch(`https://doorsteppro.shop/bookings/bookings/${bookingId}/assign-address/`, { address_id: selectedAddressId, address_pincode: confirmPincode  }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Accept': 'application/json',

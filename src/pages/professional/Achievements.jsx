@@ -8,7 +8,7 @@ function Achievements() {
   const [averageRating, setAverageRating] = useState(0);
   const user_basic_details = useSelector(state => state.user_basic_details);
   const token = localStorage.getItem('access'); // Token for authentication
-  const baseURL = 'http://127.0.0.1:8000';
+  const baseURL = 'https://doorsteppro.shop';
 
   useEffect(() => {
     const fetchBookings = async () => {

@@ -32,7 +32,7 @@ const SlotSelection = () => {
     }
 
     try {
-      await axios.post('http://127.0.0.1:8000/bookings/bookings/select-slot/', 
+      await axios.post('https://doorsteppro.shop/bookings/bookings/select-slot/', 
         { booking_id: bookingId, date: selectedDate, time: selectedTime }, 
         {
           headers: {

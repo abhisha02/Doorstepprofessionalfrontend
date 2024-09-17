@@ -7,7 +7,7 @@ function OTPVerification() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const baseURL = 'http://127.0.0.1:8000';
+  const baseURL = 'https://doorsteppro.shop';
 
   const handleOtpSubmit = async (event) => {
     event.preventDefault();

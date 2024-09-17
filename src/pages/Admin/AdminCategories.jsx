@@ -5,7 +5,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa'; // Import icons for Edit and D
 import { BsCheckCircle, BsCircle } from 'react-icons/bs'; // Import icons for Listed and Unlisted
 
 function AdminCategories() {
-  const baseURL = "http://127.0.0.1:8000";
+  const baseURL = 'https://doorsteppro.shop';
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 

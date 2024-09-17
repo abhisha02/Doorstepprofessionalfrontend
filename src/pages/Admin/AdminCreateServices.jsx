@@ -16,7 +16,7 @@ function AdminCreateServices() {
         is_listed: true,
     });
     const [showError, setShowError] = useState(false);
-    const baseURL = "http://127.0.0.1:8000";
+    const baseURL = 'https://doorsteppro.shop';
 
     useEffect(() => {
         axios.get(`${baseURL}/services/categories/`)

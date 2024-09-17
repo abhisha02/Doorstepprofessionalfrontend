@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
-const baseURL = 'http://127.0.0.1:8000';
+const baseURL = 'https://doorsteppro.shop';
 
 const updateToken = async () => {
     const refreshToken = localStorage.getItem("refresh");

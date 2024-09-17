@@ -15,7 +15,7 @@ function Favourites() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/bookings/user/favourite-services/', {
+        const response = await axios.get('https://doorsteppro.shop/bookings/user/favourite-services/', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
@@ -77,7 +77,7 @@ function Favourites() {
               {service.image ? (
                 <Link to={`/customer/services/${service.id}`} style={{ textDecoration: 'none' }}>
                   <img 
-                    src={`http://127.0.0.1:8000${service.image}`} // Ensure to prefix with your backend URL
+                    src={`https://doorsteppro.shop${service.image}`} // Ensure to prefix with your backend URL
                     alt={service.name} 
                     style={{ width: '100%', height: '150px', objectFit: 'cover', cursor: 'pointer', borderRadius: '8px' }} 
                   />

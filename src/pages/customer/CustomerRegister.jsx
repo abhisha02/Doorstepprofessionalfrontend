@@ -7,7 +7,7 @@ import registercustomer from './registercustomer.avif';
 function UserRegister() {
   const [formError, setFormError] = useState({});
   const navigate = useNavigate();
-  const baseURL = 'http://127.0.0.1:8000';
+  const baseURL = 'https://doorsteppro.shop';
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();

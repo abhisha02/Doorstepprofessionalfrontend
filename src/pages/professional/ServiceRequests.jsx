@@ -12,7 +12,7 @@ function ServiceRequests() {
   const [loading, setLoading] = useState(true);
   const user_basic_details = useSelector(state => state.user_basic_details);
   const navigate = useNavigate();
-  const baseURL = 'http://127.0.0.1:8000';
+  const baseURL = 'https://doorsteppro.shop';
   const token = localStorage.getItem('access');
   const currentUserId = user_basic_details.userId;
 

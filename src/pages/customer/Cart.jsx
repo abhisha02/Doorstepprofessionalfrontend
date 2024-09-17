@@ -8,12 +8,12 @@ const Cart = () => {
   const navigate = useNavigate();
 
   // Define the base URL for media
-  const BASE_URL = 'http://127.0.0.1:8000';
+  const BASE_URL = 'https://doorsteppro.shop';
 
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/bookings/cart/', {
+        const response = await axios.get('https://doorsteppro.shop/bookings/cart/', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -30,7 +30,7 @@ const Cart = () => {
   const handleQuantityChange = async (id, quantity) => {
     try {
       await axios.patch(
-        `http://127.0.0.1:8000/bookings/cart/item/${id}/`,
+        `https://doorsteppro.shop/bookings/cart/item/${id}/`,
         { quantity },
         {
           headers: {
@@ -50,7 +50,7 @@ const Cart = () => {
     const confirmRemove = window.confirm("Are you sure you want to delete this item?");
     if (confirmRemove) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/bookings/cart/item/${id}/delete`, {
+        await axios.delete(`https://doorsteppro.shop/bookings/cart/item/${id}/delete`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -68,7 +68,7 @@ const Cart = () => {
 
   const handleBookNow = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/bookings/create-booking/', {
+      const response = await axios.post('https://doorsteppro.shop/bookings/create-booking/', {
         cart_id: cartItems.length > 0 ? cartItems[0].cart : null,  // Pass the cart ID
       }, {
         headers: {

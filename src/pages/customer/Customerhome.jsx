@@ -12,7 +12,7 @@ function CustomerHome() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/services/latest-categories/');
+        const response = await axios.get('https://doorsteppro.shop/services/latest-categories/');
         setCategories(response.data);
         console.log("hi",categories)
       } catch (error) {
@@ -22,7 +22,7 @@ function CustomerHome() {
 
     const fetchAllCategories = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/services/all-categories/');
+        const response = await axios.get('https://doorsteppro.shop/services/all-categories/');
         setAllCategories(response.data);
       } catch (error) {
         console.error('Error fetching all categories:', error);

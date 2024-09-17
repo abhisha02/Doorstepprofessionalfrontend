@@ -13,19 +13,6 @@ import quickrepair from './images/quick repair.webp';
 import salon from './images/salon.jpg';
 import frontpic from './images/frontpic.png';
 
-// Placeholder images for recently acclaimed section
-import purifier from './images/pruifier.jpg';
-import windows from './images/windows.jpg';
-import haircoloring from './images/haircoloring.png';
-import facial from './images/facial2.png';
-import hairspa from './images/hairspa.png';
-import fullhomecleaning from './images/fullhome cleaning.jpg';
-import acrepair from './images/AC-Repair.jpg';
-import washingmachine from './images/washing machine.jpg';
-import refrigerator from './images/refrigerator.jpg';
-import kitchencleaning from './images/kitchen.jpg';
-import bathroom from './images/bathroom.jpg';
-import sofa from './images/sofa and carpet c.jpg';
 
 function HomeWrapper() {
   const [categories, setCategories] = useState([]);
@@ -36,7 +23,7 @@ function HomeWrapper() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/services/latest-categories/');
+        const response = await axios.get('https://doorsteppro.shop/services/latest-categories/');
         setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -45,7 +32,7 @@ function HomeWrapper() {
 
     const fetchAllCategories = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/services/all-categories/');
+        const response = await axios.get('https://doorsteppro.shop/services/all-categories/');
         setAllCategories(response.data);
       } catch (error) {
         console.error('Error fetching all categories:', error);
