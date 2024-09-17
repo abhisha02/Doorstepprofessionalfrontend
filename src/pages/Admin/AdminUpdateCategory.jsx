@@ -66,7 +66,7 @@ function AdminUpdateCategory() {
         })
         .then(response => {
             console.log('Category updated successfully:', response.data);
-            navigate('/admin/categories');
+            navigate('/admin/category');
         })
         .catch(error => {
             console.error('Error updating category:', error);
