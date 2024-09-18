@@ -50,7 +50,7 @@ const Cart = () => {
     const confirmRemove = window.confirm("Are you sure you want to delete this item?");
     if (confirmRemove) {
       try {
-        await axios.delete(`https://doorsteppro.shop/bookings/cart/item/${id}/delete`, {
+        await axios.delete(`https://doorsteppro.shop/bookings/cart/item/${id}/delete/`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
