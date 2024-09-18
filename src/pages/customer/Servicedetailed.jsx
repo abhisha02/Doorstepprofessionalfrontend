@@ -27,7 +27,7 @@ function Servicedetailed() {
   const handleAddToCart = async () => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/bookings/cart/add/${id}/`,
+        `https://doorsteppro.shop/bookings/cart/add/${id}/`,
         {},
         {
           headers: {
@@ -41,13 +41,13 @@ function Servicedetailed() {
       if (error.response && error.response.status === 400) {
         const replaceCart = window.confirm(error.response.data.message);
         if (replaceCart) {
-          await axios.delete(`http://127.0.0.1:8000/bookings/cart/clear/`, {
+          await axios.delete(`https://doorsteppro.shop/bookings/cart/clear/`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
           await axios.post(
-            `http://127.0.0.1:8000/bookings/cart/add/${id}/`,
+            `https://doorsteppro.shop/bookings/cart/add/${id}/`,
             {},
             {
               headers: {
