@@ -23,7 +23,8 @@ class WebSocketService {
       return;
     }
 
-    const wsUrl = `ws://https://doorsteppro.shop/ws/user/${userId}/`;
+
+    const wsUrl = `wss://doorsteppro.shop/ws/user/${userId}/`;
     
     const options = {
       reconnectInterval: this.reconnectInterval,
