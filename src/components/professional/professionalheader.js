@@ -148,14 +148,21 @@ const ProHeaderBar = () => {
     }
   }, [playNotification]);
 
+  
   const handleWebSocketMessage = useCallback((data) => {
     console.log('Received WebSocket message in ProHeaderBar:', data);
-    if (data.type === 'new_message_notification' || data.type === 'service_request_update') {
-      console.log('New message or service request update received');
-      dispatch(updateNewMessageIndicator(data.booking_id));
+    if (data.type === 'service_request_update') {
+      console.log('New service request update received:', data.booking);
+      dispatch(updateNewMessageIndicator(data.booking.id));
       playDoubleBeep();
+    } else if (data.type === 'new_message_notification') {
+      console.log('New chat message notification received');
+      // Handle chat notification
+    } else {
+      console.log('Unhandled message type:', data.type);
     }
   }, [dispatch, playDoubleBeep]);
+
 
   const logout = () => {
     console.log('Logging out');
