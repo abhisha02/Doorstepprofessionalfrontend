@@ -47,7 +47,7 @@ function Review() {
 
   const handleSubmit = async (bookingId) => {
     try {
-      await axios.post(`http://127.0.0.1:8000/bookings/user/${bookingId}/review/`, {
+      await axios.post(`https://doorsteppro.shop/bookings/user/${bookingId}/review/`, {
         rating: rating[bookingId],
         review: review[bookingId],
       }, {
