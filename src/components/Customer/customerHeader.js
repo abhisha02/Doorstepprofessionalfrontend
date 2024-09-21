@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { AppBar, Toolbar, Typography, InputBase, Box, Button, Badge, IconButton, Menu, MenuItem } from '@mui/material';
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { set_Authentication } from '../../Redux/userauthenticationSlice';
@@ -69,11 +71,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const HeaderBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const user_basic_details = useSelector(state => state.user_basic_details);
   const currentUserId = user_basic_details.userId;
   const hasNewMessages = useSelector(state => state.newMessages.hasNewMessages);
   const [notificationCount, setNotificationCount] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMenuAnchorEl, setMobileMenuAnchorEl] = useState(null);
 
   const audioContextRef = useRef(null);
   const audioRef = useRef(new Audio(`${process.env.PUBLIC_URL}/notification.mp3`));
@@ -161,6 +166,14 @@ const HeaderBar = () => {
     setNotificationCount(0);
   };
 
+  const handleMobileMenuOpen = (event) => {
+    setMobileMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuAnchorEl(null);
+  };
+
   const logout = () => {
     WebSocketService.disconnect();
     localStorage.clear();
@@ -198,7 +211,28 @@ const HeaderBar = () => {
             inputProps={{ 'aria-label': 'search' }}
           />
         </Search>
-        <Button color="inherit" onClick={() => navigate('/customer/cart')}>Cart</Button>
+        {isMobile ? (
+          <>
+            <IconButton color="inherit" onClick={handleMobileMenuOpen}>
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={mobileMenuAnchorEl}
+              open={Boolean(mobileMenuAnchorEl)}
+              onClose={handleMobileMenuClose}
+            >
+              <MenuItem onClick={() => { handleMobileMenuClose(); navigate('/customer/cart'); }}>Cart</MenuItem>
+              <MenuItem onClick={() => { handleMobileMenuClose(); navigate('/customer/account'); }}>My Account</MenuItem>
+              <MenuItem onClick={() => { handleMobileMenuClose(); logout(); }}>Logout</MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <>
+            <Button color="inherit" onClick={() => navigate('/customer/cart')}>Cart</Button>
+            <Button color="inherit" onClick={() => navigate('/customer/account')}>My Account</Button>
+            <Button color="inherit" onClick={logout}>Logout</Button>
+          </>
+        )}
         <Badge 
           color="secondary" 
           badgeContent={notificationCount}
@@ -225,8 +259,6 @@ const HeaderBar = () => {
             View Notifications
           </MenuItem>
         </Menu>
-        <Button color="inherit" onClick={() => navigate('/customer/account')}>My Account</Button>
-        <Button color="inherit" onClick={logout}>Logout</Button>
       </Toolbar>
     </Header>
   );

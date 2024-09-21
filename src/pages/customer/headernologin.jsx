@@ -1,7 +1,9 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, InputBase, Box, Button } from '@mui/material';
-import { styled, alpha } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, InputBase, Box, Button, Menu, MenuItem, IconButton } from '@mui/material';
+import { styled, alpha, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 
 const Header = styled(AppBar)(({ theme }) => ({
@@ -10,8 +12,8 @@ const Header = styled(AppBar)(({ theme }) => ({
 }));
 
 const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
-  paddingTop: theme.spacing(3), // Adjust top padding for gap (32px in this case)
-  paddingBottom: theme.spacing(1), // Optionally adjust bottom padding if needed
+  paddingTop: theme.spacing(3),
+  paddingBottom: theme.spacing(1),
   display: 'flex',
   alignItems: 'center',
 }));
@@ -24,7 +26,7 @@ const DoorstepProBox = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   borderRadius: theme.shape.borderRadius,
   cursor: 'pointer',
-  marginLeft: theme.spacing(10), // 80px gap from left
+  marginLeft: theme.spacing(10),
 }));
 
 const Search = styled('div')(({ theme }) => ({
@@ -66,10 +68,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const HeaderBar = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleNavigateHome = () => {
-    navigate('/'); // Navigate to root URL on click
+    navigate('/');
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleMenuClose();
   };
 
   return (
@@ -92,11 +110,33 @@ const HeaderBar = () => {
             inputProps={{ 'aria-label': 'search' }}
           />
         </Search>
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
-          <Button color="inherit" onClick={() => navigate('/customer/login')}>Customer</Button>
-          <Button color="inherit" onClick={() => navigate('/admin/login')}>Admin</Button>
-          <Button color="inherit" onClick={() => navigate('/professional/login')}>Professional</Button>
-        </Box>
+        {isMobile ? (
+          <>
+            <IconButton
+              color="inherit"
+              aria-label="menu"
+              onClick={handleMenuOpen}
+              edge="end"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={() => handleNavigate('/customer/login')}>Customer</MenuItem>
+              <MenuItem onClick={() => handleNavigate('/admin/login')}>Admin</MenuItem>
+              <MenuItem onClick={() => handleNavigate('/professional/login')}>Professional</MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' } }}>
+            <Button color="inherit" onClick={() => navigate('/customer/login')}>Customer</Button>
+            <Button color="inherit" onClick={() => navigate('/admin/login')}>Admin</Button>
+            <Button color="inherit" onClick={() => navigate('/professional/login')}>Professional</Button>
+          </Box>
+        )}
       </ToolbarStyled>
     </Header>
   );
