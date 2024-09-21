@@ -13,7 +13,6 @@ import quickrepair from './images/quick repair.webp';
 import salon from './images/salon.jpg';
 import frontpic from './images/frontpic.png';
 
-
 function HomeWrapper() {
   const [categories, setCategories] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
@@ -50,127 +49,43 @@ function HomeWrapper() {
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-      minWidth: '100vw',
-      margin: '0',
-      padding: '0',
-    }}>
+    <div className="home-wrapper">
       <HeaderBar />
 
-      {/* Home delivered services section */}
-      <section style={{ backgroundColor: '#f0f0f0', padding: '20px', textAlign: 'center' }}>
+      <section className="home-delivered-services">
         <h2>Home Delivered Services</h2>
       </section>
 
-      {/* Main content section */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '20px 0',
-        gap: '20px',
-        flexWrap: 'wrap'
-      }}>
-        {/* Gray box with icons */}
-        <div style={{
-          backgroundColor: 'lightgray',
-          padding: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: '10px',
-          maxWidth: '500px',
-          marginLeft: '300px',
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '10px',
-            width: '100%',
-          }}>
-            <IconWithTitle icon={applianceImage} title="Home Appliance Repair" />
-            <IconWithTitle icon={cleaning} title="Home Shine-Up" />
-            <IconWithTitle icon={installation} title="Appliance Installation" />
-            <IconWithTitle icon={laptop} title="Laptop Service" />
-            <IconWithTitle icon={quickrepair} title="Quick Repair" />
-            <IconWithTitle icon={salon} title="Salon at Home" />
-          </div>
+      <div className="main-content">
+        <div className="services-grid">
+          <IconWithTitle icon={applianceImage} title="Home Appliance Repair" />
+          <IconWithTitle icon={cleaning} title="Home Shine-Up" />
+          <IconWithTitle icon={installation} title="Appliance Installation" />
+          <IconWithTitle icon={laptop} title="Laptop Service" />
+          <IconWithTitle icon={quickrepair} title="Quick Repair" />
+          <IconWithTitle icon={salon} title="Salon at Home" />
         </div>
 
-        {/* Images section */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '20px',
-          flex: '1 1 auto',
-        }}>
-          <img src={frontpic} alt="Front Image" style={{
-            width: '100%',
-            height: 'auto',
-            borderRadius: '10px',
-            maxWidth: '600px',
-          }} />
+        <div className="front-image">
+          <img src={frontpic} alt="Front Image" />
         </div>
       </div>
 
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '20px',
-        boxSizing: 'border-box'
-      }}>
-        {categories.length > 0 ? categories.map((category, index) => (
+      <div className="categories-container">
+        {categories.length > 0 ? categories.map((category) => (
           category.id && category.latest_services ? (
-            <div key={category.id} style={{
-              width: '1100px', // Set the width of the category box
-              padding: '20px',
-              border: '1px solid #ddd',
-              borderRadius: '8px',
-              backgroundColor: '#f2f2f2',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              textAlign: 'center',
-              margin: '100px 0',
-            }}>
-              <h4 style={{ marginBottom: '20px' }}>{category.name}</h4>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '80px',
-                justifyContent: 'center', // Center the service boxes
-                alignItems: 'center',
-                width: '100%',
-              }}>
+            <div key={category.id} className="category-box">
+              <h4>{category.name}</h4>
+              <div className="services-container">
                 {category.latest_services.length > 0 ? category.latest_services.slice(0, 5).map(service => (
                   service.id && (
-                    <div key={service.id} style={{
-                      width: '200px', // Width of each service box
-                      padding: '5px',
-                      border: '1px solid #ddd',
-                      borderRadius: '8px',
-                      backgroundColor: '#fff',
-                      textAlign: 'center',
-                    }}>
+                    <div key={service.id} className="service-box">
                       {service.image && (
-                        <Link to={`/customer/services/${service.id}`} style={{ textDecoration: 'none' }}>
-                          <img src={service.image} alt={service.name} style={{
-                            width: '100%',
-                            height: '150px', // Height of service image
-                            objectFit: 'cover',
-                            cursor: 'pointer',
-                            borderRadius: '8px'
-                          }} />
+                        <Link to={`/customer/services/${service.id}`}>
+                          <img src={service.image} alt={service.name} />
                         </Link>
                       )}
-                      <h5 style={{ margin: '5px 0', fontSize: '14px' }}>{service.name}</h5>
+                      <h5>{service.name}</h5>
                     </div>
                   )
                 )) : <p>No services available</p>}
@@ -180,43 +95,18 @@ function HomeWrapper() {
         )) : <p>No categories available</p>}
       </div>
 
-      <button onClick={() => setShowDropdown(!showDropdown)} style={{
-        margin: '20px 0',
-        padding: '5px 10px',
-        fontSize: '14px',
-        cursor: 'pointer',
-        border: '1px solid #007BFF',
-        borderRadius: '4px',
-        backgroundColor: '#fff',
-        color: '#007BFF'
-      }}>
+      <button onClick={() => setShowDropdown(!showDropdown)} className="explore-button">
         {showDropdown ? 'Show Less' : 'Explore More Services'}
       </button>
 
       {showDropdown && (
-        <div style={{
-          width: '100%',
-          maxWidth: '1000px',
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '8px',
-          backgroundColor: '#f2f2f2',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          textAlign: 'center',
-          margin: '0 auto'
-        }}>
+        <div className="all-categories">
           <h4>All Categories</h4>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
+          <ul>
             {allCategories.map(category => (
               category.id && (
-                <li key={category.id} style={{ margin: '10px 0' }}>
-                  <button onClick={() => handleDropdownClick(category.id)} style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#007BFF',
-                    fontSize: '16px',
-                    cursor: 'pointer'
-                  }}>
+                <li key={category.id}>
+                  <button onClick={() => handleDropdownClick(category.id)}>
                     {category.name}
                   </button>
                 </li>
@@ -227,6 +117,180 @@ function HomeWrapper() {
       )}
 
       <FooterBar />
+
+      <style jsx>{`
+        .home-wrapper {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        .home-delivered-services {
+          background-color: #f0f0f0;
+          padding: 20px;
+          text-align: center;
+        }
+
+        .main-content {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          margin: 20px 0;
+          gap: 20px;
+        }
+
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 10px;
+          background-color: lightgray;
+          padding: 20px;
+          border-radius: 10px;
+          max-width: 500px;
+          width: 100%;
+        }
+
+        .front-image {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+
+        .front-image img {
+          width: 100%;
+          max-width: 600px;
+          height: auto;
+          border-radius: 10px;
+        }
+
+        .categories-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+          box-sizing: border-box;
+        }
+
+        .category-box {
+          width: 100%;
+          max-width: 1100px;
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          background-color: #f2f2f2;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          margin: 20px 0;
+        }
+
+        .services-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+
+        .service-box {
+          width: 200px;
+          padding: 5px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          background-color: #fff;
+          text-align: center;
+        }
+
+        .service-box img {
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+          cursor: pointer;
+          border-radius: 8px;
+        }
+
+        .explore-button {
+          margin: 20px 0;
+          padding: 5px 10px;
+          font-size: 14px;
+          cursor: pointer;
+          border: 1px solid #007BFF;
+          border-radius: 4px;
+          background-color: #fff;
+          color: #007BFF;
+        }
+
+        .all-categories {
+          width: 100%;
+          max-width: 1000px;
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          background-color: #f2f2f2;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          margin: 0 auto;
+        }
+
+        .all-categories ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        .all-categories li {
+          margin: 10px 0;
+        }
+
+        .all-categories button {
+          background: none;
+          border: none;
+          color: #007BFF;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+          .main-content {
+            flex-direction: column;
+          }
+
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 100%;
+          }
+
+          .front-image {
+            width: 100%;
+          }
+
+          .category-box {
+            max-width: 100%;
+          }
+
+          .service-box {
+            width: calc(50% - 10px);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .services-grid {
+            grid-template-columns: repeat(1, 1fr);
+          }
+
+          .service-box {
+            width: 100%;
+          }
+        }
+      `}</style>
     </div>
   );
 }
