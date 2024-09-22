@@ -160,32 +160,39 @@ const Checkout = () => {
   const timeAssigned = dateAssigned ? booking.time : null;
 
   return (
-    <div style={{ 
-      padding: '20px', 
-      display: 'flex', 
-      flexDirection: 'column', 
+    <div style={{
+      padding: '20px',
+      display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       marginBottom: '100px',
       width: '100%',
       maxWidth: '1200px',
       margin: '0 auto'
     }}>
-      <h6 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', marginBottom: '20px', textAlign: 'center' }}>Checkout</h6>
+      <h6 style={{ fontSize: '2.5rem', marginBottom: '20px', textAlign: 'center' }}>Checkout</h6>
   
       {hasItems ? (
-        <div style={{ 
-          display: 'flex', 
+        <div style={{
+          display: 'flex',
           flexDirection: 'column',
-          width: '100%', 
-          maxWidth: '1200px'
+          width: '100%',
+          '@media (min-width: 768px)': {
+            flexDirection: 'row'
+          }
         }}>
           {/* Left side: Buttons */}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center', 
-            marginBottom: '20px', 
-            width: '100%'
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            marginBottom: '20px',
+            '@media (min-width: 768px)': {
+              width: '30%',
+              alignItems: 'flex-start',
+              marginRight: '20px'
+            }
           }}>
             {!address ? (
               <button
@@ -217,9 +224,13 @@ const Checkout = () => {
                 marginTop: '50px',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                '@media (min-width: 768px)': {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between'
+                }
               }}>
-                <p style={{ margin: '0 0 10px 0', textAlign: 'center' }}>
+                <p style={{ margin: '0 0 10px 0', textAlign: 'center', '@media (min-width: 768px)': { margin: 0, textAlign: 'left' } }}>
                   <strong>Address:</strong> {address.address_line_1}, {address.address_line_2}, {address.city}, {address.state}, {address.zip_code}, {address.country}
                 </p>
                 <button
@@ -246,12 +257,17 @@ const Checkout = () => {
                 marginBottom: '20px',
                 width: '100%',
                 maxWidth: '400px',
-                marginTop: '50px',
+                marginTop: '20px',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                '@media (min-width: 768px)': {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginTop: '50px'
+                }
               }}>
-                <p style={{ margin: '0 0 10px 0', textAlign: 'center' }}>
+                <p style={{ margin: '0 0 10px 0', textAlign: 'center', '@media (min-width: 768px)': { margin: 0, textAlign: 'left' } }}>
                   <strong>Date:</strong> {dateAssigned} <strong>Time:</strong> {timeAssigned}
                 </p>
                 <button
@@ -282,7 +298,10 @@ const Checkout = () => {
                   width: '100%',
                   maxWidth: '200px',
                   textAlign: 'center',
-                  marginTop: '50px'
+                  marginTop: '20px',
+                  '@media (min-width: 768px)': {
+                    marginTop: '100px'
+                  }
                 }}
               >
                 Select Slot
@@ -291,38 +310,48 @@ const Checkout = () => {
           </div>
   
           {/* Right side: Booking Details and Payment Summary */}
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            '@media (min-width: 768px)': {
+              width: '70%'
+            }
+          }}>
             {/* Booking Details box */}
-            <div style={{ 
-              backgroundColor: '#e0e0e0', 
-              padding: '20px', 
-              borderRadius: '8px', 
-              marginBottom: '20px', 
-              width: '100%', 
-              maxWidth: '600px'
+            <div style={{
+              backgroundColor: '#e0e0e0',
+              padding: '20px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              width: '100%'
             }}>
               {booking.items.map(item => (
-                <div key={item.id} style={{ 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  alignItems: 'center', 
-                  marginBottom: '10px', 
-                  padding: '10px', 
-                  backgroundColor: '#fff', 
-                  borderRadius: '8px' 
+                <div key={item.id} style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  marginBottom: '10px',
+                  padding: '10px',
+                  backgroundColor: '#fff',
+                  borderRadius: '8px',
+                  '@media (min-width: 768px)': {
+                    flexDirection: 'row'
+                  }
                 }}>
-                  <div style={{ width: '100%', marginBottom: '10px', textAlign: 'center' }}>
+                  <div style={{ flexGrow: 1, marginBottom: '10px', '@media (min-width: 768px)': { marginBottom: 0 } }}>
                     <p style={{ margin: 0 }}><strong>{item.service.name}</strong></p>
                   </div>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
                     border: '1px solid #ccc',
                     borderRadius: '4px',
                     padding: '5px',
                     backgroundColor: '#fff',
-                    marginBottom: '10px'
+                    marginBottom: '10px',
+                    '@media (min-width: 768px)': { marginBottom: 0 }
                   }}>
                     <button
                       onClick={() => handleDecrement(item.id, item.quantity)}
@@ -348,7 +377,7 @@ const Checkout = () => {
                       <span style={{ fontSize: '16px' }}>+</span>
                     </button>
                   </div>
-                  <p style={{ margin: '0 0 10px 0' }}><strong>Rs.{parseFloat(item.amount).toFixed(2)}</strong></p>
+                  <p style={{ margin: '0 10px' }}><strong>Rs.{parseFloat(item.amount).toFixed(2)}</strong></p>
                   <button
                     onClick={() => handleRemoveItem(item.id)}
                     style={{
@@ -368,13 +397,12 @@ const Checkout = () => {
             </div>
   
             {/* Payment Summary box */}
-            <div style={{ 
-              backgroundColor: '#e0e0e0', 
-              padding: '20px', 
-              borderRadius: '8px', 
-              marginBottom: '20px', 
-              width: '100%', 
-              maxWidth: '600px'
+            <div style={{
+              backgroundColor: '#e0e0e0',
+              padding: '20px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              width: '100%'
             }}>
               <h4>Payment Summary</h4>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
@@ -387,7 +415,7 @@ const Checkout = () => {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span>Tip:</span>
-                <span>Rs. 30</span> {/* Default Tip */}
+                <span>Rs. 30</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span>Total Amount:</span>
@@ -406,8 +434,7 @@ const Checkout = () => {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 marginTop: '5px',
-                width: '100%',
-                maxWidth: '600px'
+                width: '100%'
               }}
             >
               Book Now
