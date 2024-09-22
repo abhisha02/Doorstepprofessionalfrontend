@@ -126,19 +126,21 @@ function ChatComponent({ booking, onClose, currentUserId }) {
   );
 }
 
-
 const styles = {
   chatContainer: {
     position: 'fixed',
-    bottom: '20px',
-    right: '20px',
-    width: '300px',
-    height: '400px',
+    bottom: '5%',
+    right: '5%',
+    width: '90%',
+    maxWidth: '400px',
+    height: '80vh',
+    maxHeight: '600px',
     border: '1px solid #ccc',
     borderRadius: '5px',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
+    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
   },
   chatHeader: {
     padding: '10px',
@@ -159,7 +161,7 @@ const styles = {
   },
   chatWith: {
     fontWeight: 'bold',
-    fontSize: '14px',
+    fontSize: '1em',
   },
   closeButton: {
     backgroundColor: '#333333',
@@ -168,6 +170,7 @@ const styles = {
     padding: '5px 10px',
     cursor: 'pointer',
     borderRadius: '5px',
+    fontSize: '0.9em',
   },
   messagesContainer: {
     flex: 1,
@@ -183,9 +186,10 @@ const styles = {
     borderRadius: '15px',
     maxWidth: '70%',
     wordWrap: 'break-word',
+    fontSize: '0.9em',
   },
   timestamp: {
-    fontSize: '0.8em',
+    fontSize: '0.7em',
     color: '#888',
     marginLeft: '5px',
   },
@@ -199,6 +203,7 @@ const styles = {
     padding: '5px',
     borderRadius: '5px',
     border: '1px solid #ccc',
+    fontSize: '0.9em',
   },
   sendButton: {
     backgroundColor: '#1a1a1a',
@@ -207,6 +212,7 @@ const styles = {
     padding: '5px 10px',
     cursor: 'pointer',
     borderRadius: '5px',
+    fontSize: '0.9em',
   },
   visualNotification: {
     position: 'absolute',
@@ -217,6 +223,7 @@ const styles = {
     padding: '10px',
     borderRadius: '5px',
     zIndex: 1000,
+    fontSize: '0.9em',
   },
 };
 

@@ -37,29 +37,51 @@ function Favourites() {
 
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div style={{ 
+      padding: '20px', 
+      fontFamily: 'Arial, sans-serif', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center',
+      width: '100%',
+      maxWidth: '1200px',
+      margin: '0 auto'
+    }}>
       <ToastContainer />
-      <div style={{ fontSize: '1.5rem', marginBottom: '20px', textAlign: 'center' }}>
+      <div style={{ 
+        fontSize: '1.5rem', 
+        marginBottom: '20px', 
+        textAlign: 'center', 
+        width: '100%' 
+      }}>
         <h3>Welcome, {user_basic_details.name}</h3>
         <h6>Favourite Services</h6>
       </div>
-      <div style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ 
+        position: 'static', 
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent: 'center', 
+        flexWrap: 'wrap', 
+        gap: '10px', 
+        marginBottom: '20px', 
+        width: '100%' 
+      }}>
         {['My Profile', 'Service History', 'Reviews and Ratings', 'Favourites',  'Manage Address'].map((text, index) => (
           <div
             key={text}
             style={{
-              marginTop: index === 0 ? '150px' : '0',
               backgroundColor: '#e0e0e0',
               color: '#808080',
               border: 'none',
               borderRadius: '15px',
               padding: '12px',
-              width: '200px',
+              width: 'calc(20% - 10px)',
+              minWidth: '150px',
               textAlign: 'center',
               cursor: 'pointer',
               boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
               transition: 'all 0.3s ease',
-              marginBottom: '70px',
               ':active': {
                 boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff'
               }
@@ -70,16 +92,33 @@ function Favourites() {
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+      <div style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: '20px', 
+        justifyContent: 'center', 
+        width: '100%' 
+      }}>
         {services.length > 0 ? (
           services.map(service => (
-            <div key={service.id} style={{ width: '200px', textAlign: 'center' }}>
+            <div key={service.id} style={{ 
+              width: 'calc(33.33% - 20px)', 
+              minWidth: '200px', 
+              maxWidth: '300px', 
+              textAlign: 'center' 
+            }}>
               {service.image ? (
                 <Link to={`/customer/services/${service.id}`} style={{ textDecoration: 'none' }}>
                   <img 
-                    src={`https://doorsteppro.shop${service.image}`} // Ensure to prefix with your backend URL
+                    src={`https://doorsteppro.shop${service.image}`}
                     alt={service.name} 
-                    style={{ width: '100%', height: '150px', objectFit: 'cover', cursor: 'pointer', borderRadius: '8px' }} 
+                    style={{ 
+                      width: '100%', 
+                      height: '150px', 
+                      objectFit: 'cover', 
+                      cursor: 'pointer', 
+                      borderRadius: '8px' 
+                    }} 
                   />
                 </Link>
               ) : (

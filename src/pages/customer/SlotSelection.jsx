@@ -56,12 +56,14 @@ const SlotSelection = () => {
       flexDirection: 'column', 
       alignItems: 'center', 
       justifyContent: 'center', 
-      minHeight: '100vh' 
+      minHeight: '100vh',
+      maxWidth: '100%',
+      boxSizing: 'border-box'
     }}>
-      <h4 style={{ marginBottom: '20px' }}>Select Slot</h4>
-      {error && <div style={{ color: 'red', marginBottom: '20px' }}>{error}</div>}
-      <div style={{ marginBottom: '20px' }}>
-        <label>
+      <h4 style={{ marginBottom: '20px', textAlign: 'center' }}>Select Slot</h4>
+      {error && <div style={{ color: 'red', marginBottom: '20px', textAlign: 'center', width: '100%' }}>{error}</div>}
+      <div style={{ marginBottom: '20px', width: '100%', maxWidth: '300px' }}>
+        <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           Date:
           <input 
             type="date" 
@@ -69,14 +71,18 @@ const SlotSelection = () => {
             onChange={handleDateChange}
             min={new Date().toISOString().split('T')[0]} // current date
             max={new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().split('T')[0]} // next 3 days
-            style={{ marginLeft: '10px' }}
+            style={{ marginTop: '10px', width: '100%', padding: '5px', boxSizing: 'border-box' }}
           />
         </label>
       </div>
-      <div style={{ marginBottom: '20px' }}>
-        <label>
+      <div style={{ marginBottom: '20px', width: '100%', maxWidth: '300px' }}>
+        <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           Time:
-          <select value={selectedTime} onChange={handleTimeChange} style={{ marginLeft: '10px' }}>
+          <select 
+            value={selectedTime} 
+            onChange={handleTimeChange} 
+            style={{ marginTop: '10px', width: '100%', padding: '5px', boxSizing: 'border-box' }}
+          >
             <option value="">Select time</option>
             <option value="10:00">10:00 AM</option>
             <option value="12:00">12:00 PM</option>
@@ -95,7 +101,9 @@ const SlotSelection = () => {
           border: 'none', 
           borderRadius: '10px', // Curved edges
           cursor: 'pointer', 
-          fontSize: '16px'
+          fontSize: '16px',
+          width: '100%',
+          maxWidth: '300px'
         }}
       >
         Proceed

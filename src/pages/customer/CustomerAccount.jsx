@@ -301,269 +301,154 @@ function CustomerAccount() {
     }
   };
   return (
-    <div style={{ height: '400vh', width: '100vw', position: 'relative' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px' }}>
-        <div style={{
-          fontSize: '2rem',
-          color: '#4a4a4a',
-          textShadow: '2px 2px 0px #e0e0e0',
-          marginBottom: '25px',
-          fontFamily: 'Courier New, monospace',
-          fontWeight: 'bold'
-        }}>
-          <h3>Welcome, {user_basic_details.name}</h3>
-        </div>
-        <div style={{
-          fontSize: '2rem',
-          color: '#4a4a4a',
-          textShadow: '2px 2px 0px #e0e0e0',
-          marginBottom: '25px',
-          fontFamily: 'Courier New, monospace',
-          fontWeight: 'bold'
-        }}>
-          <h4>Scheduled Bookings</h4>
+    <div className="container-fluid p-0" style={{ minHeight: '100vh', position: 'relative' }}>
+      <div className="row">
+        <div className="col-12 text-center py-4">
+          <h3 className="display-4">Welcome, {user_basic_details.name}</h3>
+          <h4 className="mt-3">Scheduled Bookings</h4>
         </div>
       </div>
-      
-      <div style={{ position: 'absolute', top: '40px', left: '20px', display: 'flex', flexDirection: 'column' }}>
-        {['My Profile', 'Service History', 'Reviews and Ratings', 'Favourites',  'Manage Address'].map((text, index) => (
-          <div
-            key={text}
-            style={{
-              marginTop: index === 0 ? '150px' : '0',
-              backgroundColor: '#e0e0e0',
-              color: '#808080',
-              border: 'none',
-              borderRadius: '15px',
-              padding: '12px',
-              width: '200px',
-              textAlign: 'center',
-              cursor: 'pointer',
-              boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
-              transition: 'all 0.3s ease',
-              marginBottom: '70px',
-              ':active': {
-                boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff'
-              }
-            }}
-            onClick={() => handleNavigation(`/customer/${text.toLowerCase().replace(/\s+/g, '-')}`)}
-          >
-            {text}
-          </div>
-        ))}
-      </div>
-  
-      {message && (
-        <div style={{ 
-          position: 'fixed', 
-          top: '250px', 
-          left: '50%', 
-          transform: 'translateX(-50%)', 
-          backgroundColor: 'lightblue', 
-          color: 'black', 
-          padding: '10px 20px', 
-          borderRadius: '5px', 
-          zIndex: 1000,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-        }}>
-          {message}
+
+      <div className="row">
+        <div className="col-md-3 col-lg-2 d-flex flex-column align-items-center mb-4">
+          {['My Profile', 'Service History', 'Reviews and Ratings', 'Favourites', 'Manage Address'].map((text, index) => (
+            <button
+              key={text}
+              className="btn btn-light shadow-sm mb-3 w-100"
+              style={{
+                maxWidth: '200px',
+                borderRadius: '15px',
+                transition: 'all 0.3s ease'
+              }}
+              onClick={() => handleNavigation(`/customer/${text.toLowerCase().replace(/\s+/g, '-')}`)}
+            >
+              {text}
+            </button>
+          ))}
         </div>
-      )}
-  
-      <div style={{ position: 'absolute', top: '250px', left: '250px', display: 'flex', flexDirection: 'column' }}>
-        {error ? (
-          <div style={{ color: 'red' }}>{error}</div>
-        ) : bookings.length > 0 ? (
-          bookings.map((booking) => (
-            <div key={booking.id} style={{
-              background: 'rgba(255, 255, 255, 0.25)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
-              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-              borderRadius: '20px',
-              padding: '20px',
-              width: '800px',
-              height: '510px',
-              marginBottom: '50px',
-              marginLeft: '200px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                {booking.category ? (
-                  <>
-                    <img src={booking.category.picture} alt={booking.category.name} style={{ width: '60px', height: '60px' }} />
-                    <h4 style={{ marginRight: '10px', marginLeft: '20px' }}> {booking.category.name}</h4>
-                  </>
-                ) : (
-                  <p>No category assigned</p>
-                )}
-              </div>
-              <h6>Booking ID: 1101001245{booking.id}</h6>
-              <div style={{ display: 'flex' }}>
-                <p>Date: {booking.date}</p>
-                <p style={{ marginLeft: '30px' }}>Time: {formatTime(booking.time)}</p>
-              </div>
-              <p>Address: {booking.address ? `${booking.address.address_line_1}, ${booking.address.city}, ${booking.address.state}, ${booking.address.country} - ${booking.address.zip_code}` : 'Address not provided'}</p>
-              <p>Price: Rs.{booking.price}</p>
-              <h5>Services Booked:</h5>
-              {booking.items.map(item => (
-                <div key={item.service_name} style={{ marginBottom: '10px' }}>
-                  <div style={{ display: 'flex', gap: '20px' }}>
-                    <p>Service: {item.service_name}</p>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Duration: {item.duration} mins</p>
+
+        <div className="col-md-9 col-lg-10">
+          {message && (
+            <div className="alert alert-info text-center my-3" role="alert">
+              {message}
+            </div>
+          )}
+
+          {error ? (
+            <div className="alert alert-danger" role="alert">{error}</div>
+          ) : bookings.length > 0 ? (
+            bookings.map((booking) => (
+              <div key={booking.id} className="card mb-4 shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex align-items-center mb-3">
+                    {booking.category ? (
+                      <>
+                        <img src={booking.category.picture} alt={booking.category.name} style={{ width: '60px', height: '60px' }} className="mr-3" />
+                        <h5 className="mb-0">{booking.category.name}</h5>
+                      </>
+                    ) : (
+                      <p>No category assigned</p>
+                    )}
                   </div>
-                </div>
-              ))}
-              {booking.professional && (
-                <>
-                  <h6>Professional Assigned: {booking.professional.first_name} {booking.professional.last_name}</h6>
-                </>
-              )}
-              <p><strong>{getStatusMessage(booking.status, booking.professional?.name)}</strong></p>
-              
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                {(booking.status !== 'task_done' && booking.status !== 'payment_done')  && (
-                  <>
-                    <button
-                      style={{ 
-                        backgroundColor: '#f0f0f0', 
-                        color: '#333', 
-                        border: '1px solid #d0d0d0', 
-                        borderRadius: '5px', 
-                        padding: '10px 15px', 
-                        marginRight: '10px',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                      }}
-                      onClick={() => handleCancel(booking.id)}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      style={{ 
-                        backgroundColor: '#e0e0e0', 
-                        color: '#333', 
-                        border: '1px solid #c0c0c0', 
-                        borderRadius: '5px', 
-                        padding: '10px 15px', 
-                        marginRight: '10px',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                      }}
-                      onClick={() => handleReschedule(booking.id)}
-                    >
-                      Reschedule
-                    </button>
-                    {(booking.status === 'professional_assigned' ) && (
-                      <button
-                        style={{ 
-                          backgroundColor: '#d0d0d0', 
-                          color: '#333', 
-                          border: '1px solid #b0b0b0', 
-                          borderRadius: '5px', 
-                          padding: '10px 15px',
-                          position: 'relative',
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                        }}
-                        onClick={() => handleChat(booking)}
-                      >
-                        Chat
-                        {bookingsWithNewMessages.includes(booking.id) && (
-                          <span style={{
-                            position: 'absolute',
-                            top: '-5px',
-                            right: '-5px',
-                            backgroundColor: 'red',
-                            borderRadius: '50%',
-                            width: '10px',
-                            height: '10px',
-                          }}></span>
+                  <h6>Booking ID: 1101001245{booking.id}</h6>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <p>Date: {booking.date}</p>
+                    </div>
+                    <div className="col-sm-6">
+                      <p>Time: {formatTime(booking.time)}</p>
+                    </div>
+                  </div>
+                  <p>Address: {booking.address ? `${booking.address.address_line_1}, ${booking.address.city}, ${booking.address.state}, ${booking.address.country} - ${booking.address.zip_code}` : 'Address not provided'}</p>
+                  <p>Price: Rs.{booking.price}</p>
+                  <h5>Services Booked:</h5>
+                  {booking.items.map(item => (
+                    <div key={item.service_name} className="mb-2">
+                      <div className="row">
+                        <div className="col-md-4">
+                          <p>Service: {item.service_name}</p>
+                        </div>
+                        <div className="col-md-4">
+                          <p>Quantity: {item.quantity}</p>
+                        </div>
+                        <div className="col-md-4">
+                          <p>Duration: {item.duration} mins</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {booking.professional && (
+                    <h6>Professional Assigned: {booking.professional.first_name} {booking.professional.last_name}</h6>
+                  )}
+                  <p><strong>{getStatusMessage(booking.status, booking.professional?.name)}</strong></p>
+                  
+                  <div className="d-flex justify-content-center mt-3">
+                    {(booking.status !== 'task_done' && booking.status !== 'payment_done') && (
+                      <>
+                        <button
+                          className="btn btn-outline-secondary mr-2"
+                          onClick={() => handleCancel(booking.id)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="btn btn-outline-primary mr-2"
+                          onClick={() => handleReschedule(booking.id)}
+                        >
+                          Reschedule
+                        </button>
+                        {(booking.status === 'professional_assigned') && (
+                          <button
+                            className="btn btn-outline-info position-relative"
+                            onClick={() => handleChat(booking)}
+                          >
+                            Chat
+                            {bookingsWithNewMessages.includes(booking.id) && (
+                              <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                <span className="visually-hidden">New messages</span>
+                              </span>
+                            )}
+                          </button>
                         )}
+                      </>
+                    )}
+                    {booking.status === 'task_done' && (
+                      <button
+                        className="btn btn-success"
+                        onClick={() => handlePayment(booking)}
+                      >
+                        Pay Now
                       </button>
                     )}
-                  </>
-                )}
-                {booking.status === 'task_done' && (
-                  <button
-                    style={{ 
-                      backgroundColor: '#c0c0c0', 
-                      color: '#333', 
-                      border: '1px solid #a0a0a0', 
-                      borderRadius: '5px', 
-                      padding: '10px 15px',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                    }}
-                    onClick={() => handlePayment(booking)}
-                  >
-                    Pay Now
-                  </button>
-                )}
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="card shadow-sm">
+              <div className="card-body text-center py-5">
+                <p className="h4 text-muted">No bookings yet</p>
               </div>
             </div>
-          ))
-        ) : (
-          <div style={{
-            background: 'linear-gradient(145deg, #f0f0f0, #e6e6e6)',
-            borderRadius: '20px',
-            boxShadow: '20px 20px 60px #d1d1d1, -20px -20px 60px #ffffff',
-            padding: '40px',
-            width: '600px',
-            height: '200px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginLeft: '200px'
-          }}>
-            <p style={{
-              fontSize: '24px',
-              color: '#888',
-              textAlign: 'center',
-              fontWeight: '300',
-              textShadow: '1px 1px 2px #fff'
-            }}>
-              No bookings yet
-            </p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       
       {showPopup && (
-        <div style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: 'white',
-          padding: '20px',
-          borderRadius: '10px',
-          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-          zIndex: 1000,
-          maxWidth: '400px',
-          width: '90%',
-          textAlign: 'center'
-        }}>
-          <h3>We apologize</h3>
-          <p>Sorry, we are unable to process booking ID: 1101001245{popupBookingId} as professionals in your area are currently busy. This booking will be cancelled.</p>
-          <button
-            onClick={handlePopupOk}
-            style={{
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginTop: '15px'
-            }}
-          >
-            OK
-          </button>
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">We apologize</h5>
+              </div>
+              <div className="modal-body">
+                <p>Sorry, we are unable to process booking ID: 1101001245{popupBookingId} as professionals in your area are currently busy. This booking will be cancelled.</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={handlePopupOk}>OK</button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
       

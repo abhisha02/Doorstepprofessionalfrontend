@@ -147,16 +147,16 @@ const Addresses = () => {
 
   return (
     <div style={{ 
-      padding: '30px', 
+      padding: '5%', 
       minHeight: '100vh', 
       backgroundColor: '#f0f0f0', 
       fontFamily: 'Arial, sans-serif' 
     }}>
       <h2 style={{ 
         textAlign: 'center', 
-        marginBottom: '30px', 
+        marginBottom: '5%', 
         color: '#333',
-        fontSize: '28px',
+        fontSize: 'clamp(20px, 4vw, 28px)',
         fontWeight: 'bold'
       }}>
         Saved Addresses
@@ -173,8 +173,8 @@ const Addresses = () => {
             key={address.id}
             style={{
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
               padding: '15px',
               backgroundColor: '#ffffff',
               borderRadius: '10px',
@@ -186,18 +186,18 @@ const Addresses = () => {
             }}
             onClick={() => setSelectedAddressId(address.id)}
           >
-            <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginBottom: '10px' }}>
               <input
                 type="radio"
                 checked={selectedAddressId === address.id}
                 onChange={() => setSelectedAddressId(address.id)}
                 style={{ marginRight: '15px', transform: 'scale(1.2)' }}
               />
-              <p style={{ margin: 0, fontSize: '16px', color: '#333' }}>
+              <p style={{ margin: 0, fontSize: 'clamp(14px, 3vw, 16px)', color: '#333', flexGrow: 1, wordBreak: 'break-word' }}>
                 {address.address_line_1}, {address.city}, {address.state}, {address.country} - {address.zip_code}
               </p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '100%' }}>
               <button
                 onClick={() => handleEditAddress(address)}
                 style={{
@@ -208,7 +208,8 @@ const Addresses = () => {
                   backgroundColor: '#4a4a4a',
                   color: '#fff',
                   cursor: 'pointer',
-                  transition: 'background-color 0.3s ease'
+                  transition: 'background-color 0.3s ease',
+                  fontSize: 'clamp(12px, 2.5vw, 14px)'
                 }}
               >
                 Edit
@@ -243,7 +244,7 @@ const Addresses = () => {
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center', 
-        margin: '30px 0',
+        margin: '5% 0',
         flexDirection: 'column'
       }}>
         <div style={{
@@ -251,7 +252,9 @@ const Addresses = () => {
           padding: '20px',
           borderRadius: '10px',
           boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          marginBottom: '20px'
+          marginBottom: '20px',
+          width: '100%',
+          maxWidth: '300px'
         }}>
           <input
             type="text"
@@ -262,15 +265,15 @@ const Addresses = () => {
               padding: '12px',
               borderRadius: '5px',
               border: '1px solid #ccc',
-              width: '250px',
+              width: '100%',
               textAlign: 'center',
-              fontSize: '16px',
+              fontSize: 'clamp(14px, 3vw, 16px)',
               outline: 'none'
             }}
           />
         </div>
         
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '300px', gap: '10px' }}>
           <button
             onClick={() => {
               resetAddressForm();
@@ -283,8 +286,7 @@ const Addresses = () => {
               border: 'none',
               borderRadius: '5px',
               cursor: 'pointer',
-              margin: '10px',
-              fontSize: '16px',
+              fontSize: 'clamp(14px, 3vw, 16px)',
               transition: 'background-color 0.3s ease'
             }}
           >
@@ -299,8 +301,7 @@ const Addresses = () => {
               border: 'none',
               borderRadius: '5px',
               cursor: 'pointer',
-              margin: '10px',
-              fontSize: '16px',
+              fontSize: 'clamp(14px, 3vw, 16px)',
               transition: 'background-color 0.3s ease'
             }}
           >
@@ -323,12 +324,12 @@ const Addresses = () => {
         }}>
           <div style={{
             backgroundColor: '#fff',
-            padding: '30px',
+            padding: '5%',
             borderRadius: '10px',
             width: '90%',
             maxWidth: '500px'
           }}>
-            <h2 style={{ marginBottom: '20px', color: '#333' }}>
+            <h2 style={{ marginBottom: '20px', color: '#333', fontSize: 'clamp(18px, 4vw, 24px)' }}>
               {editingAddress ? 'Edit Address' : 'Add New Address'}
             </h2>
             {['address_line_1', 'address_line_2', 'city', 'state', 'country', 'zip_code'].map((field) => (
@@ -345,7 +346,7 @@ const Addresses = () => {
                   marginBottom: '15px',
                   borderRadius: '5px',
                   border: '1px solid #ccc',
-                  fontSize: '16px'
+                  fontSize: 'clamp(14px, 3vw, 16px)'
                 }}
               />
             ))}
@@ -360,7 +361,7 @@ const Addresses = () => {
                   borderRadius: '5px',
                   cursor: 'pointer',
                   marginRight: '10px',
-                  fontSize: '16px'
+                  fontSize: 'clamp(14px, 3vw, 16px)'
                 }}
               >
                 {editingAddress ? 'Update Address' : 'Add Address'}
@@ -374,7 +375,7 @@ const Addresses = () => {
                   border: 'none',
                   borderRadius: '5px',
                   cursor: 'pointer',
-                  fontSize: '16px'
+                  fontSize: 'clamp(14px, 3vw, 16px)'
                 }}
               >
                 Cancel
@@ -398,13 +399,13 @@ const Addresses = () => {
         }}>
           <div style={{
             backgroundColor: '#fff',
-            padding: '30px',
+            padding: '5%',
             borderRadius: '10px',
             width: '90%',
             maxWidth: '400px',
             textAlign: 'center'
           }}>
-            <h3 style={{ marginBottom: '20px', color: '#333' }}>Are you sure you want to delete this address?</h3>
+            <h3 style={{ marginBottom: '20px', color: '#333', fontSize: 'clamp(16px, 3.5vw, 20px)' }}>Are you sure you want to delete this address?</h3>
             <button
               onClick={handleDeleteAddress}
               style={{
@@ -415,7 +416,7 @@ const Addresses = () => {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 marginRight: '10px',
-                fontSize: '16px'
+                fontSize: 'clamp(14px, 3vw, 16px)'
               }}
             >
               Yes, Delete
@@ -429,7 +430,7 @@ const Addresses = () => {
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                fontSize: '16px'
+                fontSize: 'clamp(14px, 3vw, 16px)'
               }}
             >
               Cancel

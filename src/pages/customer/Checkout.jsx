@@ -160,13 +160,33 @@ const Checkout = () => {
   const timeAssigned = dateAssigned ? booking.time : null;
 
   return (
-    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center',marginBottom:'100px' }}>
-      <h6 style={{ fontSize: '2.5rem', marginBottom: '20px', textAlign: 'center' }}>Checkout</h6>
-
+    <div style={{ 
+      padding: '20px', 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center',
+      marginBottom: '100px',
+      width: '100%',
+      maxWidth: '1200px',
+      margin: '0 auto'
+    }}>
+      <h6 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', marginBottom: '20px', textAlign: 'center' }}>Checkout</h6>
+  
       {hasItems ? (
-        <div style={{ display: 'flex', width: '100%', maxWidth: '1200px' }}>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          width: '100%', 
+          maxWidth: '1200px'
+        }}>
           {/* Left side: Buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: '20px' }}>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            marginBottom: '20px', 
+            width: '100%'
+          }}>
             {!address ? (
               <button
                 onClick={() => navigate('/customer/addresses')}
@@ -177,10 +197,10 @@ const Checkout = () => {
                   border: 'none',
                   borderRadius: '5px',
                   cursor: 'pointer',
-                  width: '200px',
+                  width: '100%',
+                  maxWidth: '200px',
                   textAlign: 'center',
                   marginBottom: '10px',
-                  marginLeft: '200px',
                   marginTop: '50px'
                 }}
               >
@@ -192,14 +212,14 @@ const Checkout = () => {
                 padding: '10px',
                 borderRadius: '8px',
                 marginBottom: '20px',
+                width: '100%',
                 maxWidth: '400px',
-                marginLeft: '130px',
                 marginTop: '50px',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                flexDirection: 'column',
+                alignItems: 'center'
               }}>
-                <p style={{ margin: 0 }}>
+                <p style={{ margin: '0 0 10px 0', textAlign: 'center' }}>
                   <strong>Address:</strong> {address.address_line_1}, {address.address_line_2}, {address.city}, {address.state}, {address.zip_code}, {address.country}
                 </p>
                 <button
@@ -224,14 +244,14 @@ const Checkout = () => {
                 padding: '10px',
                 borderRadius: '8px',
                 marginBottom: '20px',
+                width: '100%',
                 maxWidth: '400px',
-                marginLeft: '130px',
                 marginTop: '50px',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                flexDirection: 'column',
+                alignItems: 'center'
               }}>
-                <p style={{ margin: 0 }}>
+                <p style={{ margin: '0 0 10px 0', textAlign: 'center' }}>
                   <strong>Date:</strong> {dateAssigned} <strong>Time:</strong> {timeAssigned}
                 </p>
                 <button
@@ -243,8 +263,7 @@ const Checkout = () => {
                     border: '1px solid #000',
                     borderRadius: '5px',
                     cursor: 'pointer',
-                    fontSize: '14px',
-                    marginLeft: '30px'
+                    fontSize: '14px'
                   }}
                 >
                   Edit
@@ -260,33 +279,50 @@ const Checkout = () => {
                   border: 'none',
                   borderRadius: '5px',
                   cursor: 'pointer',
-                  width: '200px',
-                  marginLeft: '200px',
+                  width: '100%',
+                  maxWidth: '200px',
                   textAlign: 'center',
-                  marginTop: '100px'
+                  marginTop: '50px'
                 }}
               >
                 Select Slot
               </button>
             )}
           </div>
-
+  
           {/* Right side: Booking Details and Payment Summary */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {/* Booking Details box */}
-            <div style={{ backgroundColor: '#e0e0e0', padding: '20px', borderRadius: '8px', marginBottom: '20px', maxWidth: '600px', marginLeft: '100px', marginTop: '50px' }}>
+            <div style={{ 
+              backgroundColor: '#e0e0e0', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              marginBottom: '20px', 
+              width: '100%', 
+              maxWidth: '600px'
+            }}>
               {booking.items.map(item => (
-                <div key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '8px' }}>
-                  <div style={{ flexGrow: 1 }}>
+                <div key={item.id} style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  alignItems: 'center', 
+                  marginBottom: '10px', 
+                  padding: '10px', 
+                  backgroundColor: '#fff', 
+                  borderRadius: '8px' 
+                }}>
+                  <div style={{ width: '100%', marginBottom: '10px', textAlign: 'center' }}>
                     <p style={{ margin: 0 }}><strong>{item.service.name}</strong></p>
                   </div>
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     border: '1px solid #ccc',
                     borderRadius: '4px',
                     padding: '5px',
-                    backgroundColor: '#fff'
+                    backgroundColor: '#fff',
+                    marginBottom: '10px'
                   }}>
                     <button
                       onClick={() => handleDecrement(item.id, item.quantity)}
@@ -312,7 +348,7 @@ const Checkout = () => {
                       <span style={{ fontSize: '16px' }}>+</span>
                     </button>
                   </div>
-                  <p style={{ margin: 0, marginLeft: '10px' }}><strong>Rs.{parseFloat(item.amount).toFixed(2)}</strong></p>
+                  <p style={{ margin: '0 0 10px 0' }}><strong>Rs.{parseFloat(item.amount).toFixed(2)}</strong></p>
                   <button
                     onClick={() => handleRemoveItem(item.id)}
                     style={{
@@ -320,7 +356,6 @@ const Checkout = () => {
                       color: '#dc3545',
                       borderRadius: '5px',
                       padding: '8px 12px',
-                      marginLeft: '10px',
                       cursor: 'pointer',
                       backgroundColor: 'transparent',
                       fontSize: '16px'
@@ -331,9 +366,16 @@ const Checkout = () => {
                 </div>
               ))}
             </div>
-
+  
             {/* Payment Summary box */}
-            <div style={{ backgroundColor: '#e0e0e0', padding: '20px', borderRadius: '8px', marginBottom: '20px', maxWidth: '600px', marginLeft: '100px', marginTop: '10px' }}>
+            <div style={{ 
+              backgroundColor: '#e0e0e0', 
+              padding: '20px', 
+              borderRadius: '8px', 
+              marginBottom: '20px', 
+              width: '100%', 
+              maxWidth: '600px'
+            }}>
               <h4>Payment Summary</h4>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span>Total Price:</span>
@@ -352,7 +394,7 @@ const Checkout = () => {
                 <span>Rs.{amountToPay.toFixed(2)}</span>
               </div>
             </div>
-
+  
             {/* Book Now Button */}
             <button
               onClick={handleBookNow}
@@ -364,8 +406,8 @@ const Checkout = () => {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 marginTop: '5px',
-                maxWidth: '600px',
-                marginLeft: '100px'
+                width: '100%',
+                maxWidth: '600px'
               }}
             >
               Book Now
@@ -375,7 +417,7 @@ const Checkout = () => {
       ) : (
         <div>No items in the booking.</div>
       )}
-
+  
       {/* Render Modal if needed */}
       {showModal && <Modal message={modalMessage} onClose={() => setShowModal(false)} />}
     </div>
