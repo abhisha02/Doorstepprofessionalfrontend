@@ -37,106 +37,60 @@ function Favourites() {
 
 
   return (
-    <div style={{
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
-    }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <ToastContainer />
       <div style={{ fontSize: '1.5rem', marginBottom: '20px', textAlign: 'center' }}>
         <h3>Welcome, {user_basic_details.name}</h3>
         <h6>Favourite Services</h6>
       </div>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        '@media (min-width: 768px)': {
-          flexDirection: 'row'
-        }
-      }}>
-        <div style={{
-          marginBottom: '20px',
-          '@media (min-width: 768px)': {
-            width: '25%',
-            marginBottom: '0'
-          }
-        }}>
-          {['My Profile', 'Service History', 'Reviews and Ratings', 'Favourites', 'Manage Address'].map((text, index) => (
-            <div
-              key={text}
-              onClick={() => handleNavigation(`/customer/${text.toLowerCase().replace(/\s+/g, '-')}`)}
-              style={{
-                backgroundColor: '#e0e0e0',
-                color: '#808080',
-                border: 'none',
-                borderRadius: '15px',
-                padding: '12px',
-                width: '100%',
-                textAlign: 'center',
-                cursor: 'pointer',
-                boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
-                transition: 'all 0.3s ease',
-                marginBottom: '20px',
-                '@media (min-width: 768px)': {
-                  width: '200px'
-                }
-              }}
-            >
-              {text}
-            </div>
-          ))}
-        </div>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '20px',
-          justifyContent: 'center',
-          '@media (min-width: 768px)': {
-            width: '75%'
-          }
-        }}>
-          {services.length > 0 ? (
-            services.map(service => (
-              <div key={service.id} style={{
-                width: '100%',
-                textAlign: 'center',
-                '@media (min-width: 640px)': { width: 'calc(50% - 20px)' },
-                '@media (min-width: 768px)': { width: 'calc(33.33% - 20px)' },
-                '@media (min-width: 1024px)': { width: 'calc(25% - 20px)' },
-                '@media (min-width: 1280px)': { width: 'calc(20% - 20px)' }
-              }}>
+      <div style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', flexDirection: 'column' }}>
+        {['My Profile', 'Service History', 'Reviews and Ratings', 'Favourites',  'Manage Address'].map((text, index) => (
+          <div
+            key={text}
+            style={{
+              marginTop: index === 0 ? '150px' : '0',
+              backgroundColor: '#e0e0e0',
+              color: '#808080',
+              border: 'none',
+              borderRadius: '15px',
+              padding: '12px',
+              width: '200px',
+              textAlign: 'center',
+              cursor: 'pointer',
+              boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
+              transition: 'all 0.3s ease',
+              marginBottom: '70px',
+              ':active': {
+                boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff'
+              }
+            }}
+            onClick={() => handleNavigation(`/customer/${text.toLowerCase().replace(/\s+/g, '-')}`)}
+          >
+            {text}
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+        {services.length > 0 ? (
+          services.map(service => (
+            <div key={service.id} style={{ width: '200px', textAlign: 'center' }}>
+              {service.image ? (
                 <Link to={`/customer/services/${service.id}`} style={{ textDecoration: 'none' }}>
-                  {service.image ? (
-                    <img
-                      src={`https://doorsteppro.shop${service.image}`}
-                      alt={service.name}
-                      style={{
-                        width: '100%',
-                        height: '150px',
-                        objectFit: 'cover',
-                        cursor: 'pointer',
-                        borderRadius: '8px'
-                      }}
-                    />
-                  ) : (
-                    <div style={{
-                      width: '100%',
-                      height: '150px',
-                      backgroundColor: '#ddd',
-                      borderRadius: '8px'
-                    }}></div>
-                  )}
-                  <h5 style={{ margin: '10px 0', fontSize: '16px' }}>{service.name}</h5>
+                  <img 
+                    src={`https://doorsteppro.shop${service.image}`} // Ensure to prefix with your backend URL
+                    alt={service.name} 
+                    style={{ width: '100%', height: '150px', objectFit: 'cover', cursor: 'pointer', borderRadius: '8px' }} 
+                  />
                 </Link>
-              </div>
-            ))
-          ) : (
-            <p>No services found</p>
-          )}
-        </div>
+              ) : (
+                <div style={{ width: '100%', height: '150px', backgroundColor: '#ddd', borderRadius: '8px' }}></div>
+              )}
+              <h5 style={{ margin: '10px 0', fontSize: '16px' }}>{service.name}</h5>
+            </div>
+          ))
+        ) : (
+          <p>No services found</p>
+        )}
       </div>
     </div>
   );

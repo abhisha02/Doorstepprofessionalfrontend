@@ -160,40 +160,13 @@ const Checkout = () => {
   const timeAssigned = dateAssigned ? booking.time : null;
 
   return (
-    <div style={{
-      padding: '20px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      marginBottom: '100px',
-      width: '100%',
-      maxWidth: '1200px',
-      margin: '0 auto'
-    }}>
+    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center',marginBottom:'100px' }}>
       <h6 style={{ fontSize: '2.5rem', marginBottom: '20px', textAlign: 'center' }}>Checkout</h6>
-  
+
       {hasItems ? (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          '@media (min-width: 768px)': {
-            flexDirection: 'row'
-          }
-        }}>
+        <div style={{ display: 'flex', width: '100%', maxWidth: '1200px' }}>
           {/* Left side: Buttons */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
-            marginBottom: '20px',
-            '@media (min-width: 768px)': {
-              width: '30%',
-              alignItems: 'flex-start',
-              marginRight: '20px'
-            }
-          }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: '20px' }}>
             {!address ? (
               <button
                 onClick={() => navigate('/customer/addresses')}
@@ -204,10 +177,10 @@ const Checkout = () => {
                   border: 'none',
                   borderRadius: '5px',
                   cursor: 'pointer',
-                  width: '100%',
-                  maxWidth: '200px',
+                  width: '200px',
                   textAlign: 'center',
                   marginBottom: '10px',
+                  marginLeft: '200px',
                   marginTop: '50px'
                 }}
               >
@@ -219,18 +192,14 @@ const Checkout = () => {
                 padding: '10px',
                 borderRadius: '8px',
                 marginBottom: '20px',
-                width: '100%',
                 maxWidth: '400px',
+                marginLeft: '130px',
                 marginTop: '50px',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
-                '@media (min-width: 768px)': {
-                  flexDirection: 'row',
-                  justifyContent: 'space-between'
-                }
+                justifyContent: 'space-between'
               }}>
-                <p style={{ margin: '0 0 10px 0', textAlign: 'center', '@media (min-width: 768px)': { margin: 0, textAlign: 'left' } }}>
+                <p style={{ margin: 0 }}>
                   <strong>Address:</strong> {address.address_line_1}, {address.address_line_2}, {address.city}, {address.state}, {address.zip_code}, {address.country}
                 </p>
                 <button
@@ -255,19 +224,14 @@ const Checkout = () => {
                 padding: '10px',
                 borderRadius: '8px',
                 marginBottom: '20px',
-                width: '100%',
                 maxWidth: '400px',
-                marginTop: '20px',
+                marginLeft: '130px',
+                marginTop: '50px',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
-                '@media (min-width: 768px)': {
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: '50px'
-                }
+                justifyContent: 'space-between'
               }}>
-                <p style={{ margin: '0 0 10px 0', textAlign: 'center', '@media (min-width: 768px)': { margin: 0, textAlign: 'left' } }}>
+                <p style={{ margin: 0 }}>
                   <strong>Date:</strong> {dateAssigned} <strong>Time:</strong> {timeAssigned}
                 </p>
                 <button
@@ -279,7 +243,8 @@ const Checkout = () => {
                     border: '1px solid #000',
                     borderRadius: '5px',
                     cursor: 'pointer',
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    marginLeft: '30px'
                   }}
                 >
                   Edit
@@ -295,52 +260,24 @@ const Checkout = () => {
                   border: 'none',
                   borderRadius: '5px',
                   cursor: 'pointer',
-                  width: '100%',
-                  maxWidth: '200px',
+                  width: '200px',
+                  marginLeft: '200px',
                   textAlign: 'center',
-                  marginTop: '20px',
-                  '@media (min-width: 768px)': {
-                    marginTop: '100px'
-                  }
+                  marginTop: '100px'
                 }}
               >
                 Select Slot
               </button>
             )}
           </div>
-  
+
           {/* Right side: Booking Details and Payment Summary */}
-          <div style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            '@media (min-width: 768px)': {
-              width: '70%'
-            }
-          }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             {/* Booking Details box */}
-            <div style={{
-              backgroundColor: '#e0e0e0',
-              padding: '20px',
-              borderRadius: '8px',
-              marginBottom: '20px',
-              width: '100%'
-            }}>
+            <div style={{ backgroundColor: '#e0e0e0', padding: '20px', borderRadius: '8px', marginBottom: '20px', maxWidth: '600px', marginLeft: '100px', marginTop: '50px' }}>
               {booking.items.map(item => (
-                <div key={item.id} style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  marginBottom: '10px',
-                  padding: '10px',
-                  backgroundColor: '#fff',
-                  borderRadius: '8px',
-                  '@media (min-width: 768px)': {
-                    flexDirection: 'row'
-                  }
-                }}>
-                  <div style={{ flexGrow: 1, marginBottom: '10px', '@media (min-width: 768px)': { marginBottom: 0 } }}>
+                <div key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '8px' }}>
+                  <div style={{ flexGrow: 1 }}>
                     <p style={{ margin: 0 }}><strong>{item.service.name}</strong></p>
                   </div>
                   <div style={{
@@ -349,9 +286,7 @@ const Checkout = () => {
                     border: '1px solid #ccc',
                     borderRadius: '4px',
                     padding: '5px',
-                    backgroundColor: '#fff',
-                    marginBottom: '10px',
-                    '@media (min-width: 768px)': { marginBottom: 0 }
+                    backgroundColor: '#fff'
                   }}>
                     <button
                       onClick={() => handleDecrement(item.id, item.quantity)}
@@ -377,7 +312,7 @@ const Checkout = () => {
                       <span style={{ fontSize: '16px' }}>+</span>
                     </button>
                   </div>
-                  <p style={{ margin: '0 10px' }}><strong>Rs.{parseFloat(item.amount).toFixed(2)}</strong></p>
+                  <p style={{ margin: 0, marginLeft: '10px' }}><strong>Rs.{parseFloat(item.amount).toFixed(2)}</strong></p>
                   <button
                     onClick={() => handleRemoveItem(item.id)}
                     style={{
@@ -385,6 +320,7 @@ const Checkout = () => {
                       color: '#dc3545',
                       borderRadius: '5px',
                       padding: '8px 12px',
+                      marginLeft: '10px',
                       cursor: 'pointer',
                       backgroundColor: 'transparent',
                       fontSize: '16px'
@@ -395,15 +331,9 @@ const Checkout = () => {
                 </div>
               ))}
             </div>
-  
+
             {/* Payment Summary box */}
-            <div style={{
-              backgroundColor: '#e0e0e0',
-              padding: '20px',
-              borderRadius: '8px',
-              marginBottom: '20px',
-              width: '100%'
-            }}>
+            <div style={{ backgroundColor: '#e0e0e0', padding: '20px', borderRadius: '8px', marginBottom: '20px', maxWidth: '600px', marginLeft: '100px', marginTop: '10px' }}>
               <h4>Payment Summary</h4>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span>Total Price:</span>
@@ -415,14 +345,14 @@ const Checkout = () => {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span>Tip:</span>
-                <span>Rs. 30</span>
+                <span>Rs. 30</span> {/* Default Tip */}
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span>Total Amount:</span>
                 <span>Rs.{amountToPay.toFixed(2)}</span>
               </div>
             </div>
-  
+
             {/* Book Now Button */}
             <button
               onClick={handleBookNow}
@@ -434,7 +364,8 @@ const Checkout = () => {
                 borderRadius: '5px',
                 cursor: 'pointer',
                 marginTop: '5px',
-                width: '100%'
+                maxWidth: '600px',
+                marginLeft: '100px'
               }}
             >
               Book Now
@@ -444,7 +375,7 @@ const Checkout = () => {
       ) : (
         <div>No items in the booking.</div>
       )}
-  
+
       {/* Render Modal if needed */}
       {showModal && <Modal message={modalMessage} onClose={() => setShowModal(false)} />}
     </div>
