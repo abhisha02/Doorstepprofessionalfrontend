@@ -44,7 +44,7 @@ const Reschedule = () => {
       );
 
       // Update the booking status to "rescheduled"
-      await axios.patch(`http://127.0.0.1:8000/bookings/bookings/update-status-rescheduled/${bookingId}/`, 
+      await axios.patch(`https://doorsteppro.shop/bookings/bookings/update-status-rescheduled/${bookingId}/`, 
         { status: 'rescheduled' }, 
         {
           headers: {

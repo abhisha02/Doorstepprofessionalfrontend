@@ -92,7 +92,7 @@ function UserLogin() {
     console.log('Google login response:', response);
     try {
       console.log('Sending credential:', response.credential);
-      const res = await axios.post('http://127.0.0.1:8000/auth/google/', {
+      const res = await axios.post('https://doorsteppro.shop/auth/google/', {
         credential: response.credential
       }, {
         headers: {
