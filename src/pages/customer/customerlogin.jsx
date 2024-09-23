@@ -18,8 +18,8 @@ function UserLogin() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (state) {
-      setMessage(state);
+    if (state && state.resetMessage) {
+      setMessage(state.resetMessage);
       const timer = setTimeout(() => setMessage(null), 5000);
       return () => clearTimeout(timer);
     }

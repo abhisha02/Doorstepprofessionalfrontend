@@ -21,18 +21,12 @@ function ProUserLogin() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.state && location.state.resetMessage) {
-      setMessage(location.state.resetMessage);
-
-      // Remove the message after 5 seconds
-      const timer = setTimeout(() => {
-        setMessage(null);
-      }, 5000); // Duration in milliseconds
-
-      // Cleanup timer on component unmount
+    if (state && state.resetMessage) {
+      setMessage(state.resetMessage);
+      const timer = setTimeout(() => setMessage(null), 5000);
       return () => clearTimeout(timer);
     }
-  }, [location.state]);
+  }, [state]);
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
